@@ -6,16 +6,16 @@
 
 - **PART A** — Web Direct 구독 만들기 (기존 테넌트 · Directory 확인)
 - **PART B** — Foundry에서 Claude 배포
-- **PART C** — `MarketplaceSubscriptionCannotBeCompleted`로 막혔을 때
+- **PART C** — `MarketplaceSubscriptionCannotBeCompleted`로 막혔을 때 (지원 요청 → 재배포 → Succeeded)
 
-라이트/다크 모드를 지원하며(우측 상단 버튼) 이미지가 모두 포함된 단일 HTML 파일(`index.html`)입니다. 화면의 계정·구독 ID·테넌트는 예시 값(Contoso)으로 바꾸고 입력란은 가렸습니다.
+라이트/다크 모드를 지원하며(우측 상단 버튼) 대부분의 이미지는 `index.html`에 포함되어 있고, 2026-10-30에 현재 Foundry 화면으로 새로 찍은 3장(STEP 7~8)은 `assets/`에 있습니다. 화면의 계정·구독 ID·테넌트는 예시 값(Contoso)으로 바꾸고 입력란은 가렸습니다.
 
-> 개인 저장소이며 Microsoft 공식 문서가 아닙니다. 2026-10-28 기준이므로 포털 화면과 [Microsoft Learn](https://learn.microsoft.com/azure/foundry/foundry-models/how-to/use-foundry-models-claude)의 최신 내용을 함께 확인하세요.
+> 개인 저장소이며 Microsoft 공식 문서가 아닙니다. 2026-10-30 기준이므로 포털 화면과 [Microsoft Learn](https://learn.microsoft.com/azure/foundry/foundry-models/how-to/use-foundry-models-claude)의 최신 내용을 함께 확인하세요.
 
 ## 업데이트
 
 `main` 브랜치에 push하면 GitHub Pages가 자동으로 다시 배포합니다(약 1~2분 후 반영).
 
 ```bash
-git add index.html && git commit -m "update guide" && git push
+git add index.html assets && git commit -m "update guide" && git push
 ```
