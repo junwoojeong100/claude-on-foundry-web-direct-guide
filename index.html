@@ -304,6 +304,16 @@ details.fallback > summary:focus-visible { outline: 3px solid var(--cp-accent); 
 .ladder li.now { border-color: var(--cp-warning); background: color-mix(in srgb, var(--cp-warning) 20%, transparent); color: var(--cp-text); }
 .ladder li.next { border-color: var(--cp-link); background: color-mix(in srgb, var(--cp-link) 16%, transparent); color: var(--cp-text); }
 
+.plan { margin-top: 18px; padding: 20px 24px 20px; border-left: 6px solid var(--cp-link); }
+.plan h3 { margin: 0 0 14px; font-size: 20px; line-height: 1.4; }
+.plan ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+.plan li { display: grid; grid-template-columns: 32px 1fr; gap: 12px; align-items: start; }
+.plan li > div { min-width: 0; }
+.plan .pn { display: grid; place-items: center; width: 28px; height: 28px; margin-top: 1px; border-radius: 50%; background: var(--cp-link); color: var(--cp-accent-fg); font-size: 14px; font-weight: 700; }
+.plan li b { font-size: 17px; }
+.plan a.go { margin-left: 2px; font-weight: 650; white-space: nowrap; }
+.plan .rule { margin: 14px 0 0; padding-top: 12px; border-top: 1px dashed var(--cp-border-strong); color: var(--muted); font-size: 15px; }
+
 /* ---------- lightbox ---------- */
 .lb { position: fixed; inset: 0; z-index: 100; display: flex; align-items: flex-start; justify-content: center; overflow: auto; padding: 28px 16px; background: var(--cp-overlay); cursor: zoom-out; }
 .lb[hidden] { display: none; }
@@ -345,10 +355,12 @@ details.fallback > summary:focus-visible { outline: 3px solid var(--cp-accent); 
   .tbl.stack tr { padding: 10px 14px; border-bottom: 1px solid var(--cp-border); }
   .tbl.stack tbody tr:last-child { border-bottom: 0; }
   .tbl.stack td { padding: 3px 0; border: 0; white-space: normal; }
+  .plan { padding: 16px 16px 16px; }
   .tbl.stack td::before { content: attr(data-l); display: block; color: var(--muted); font-size: 12px; font-weight: 700; }
 }
 @media print {
   .copy { display: none; }
+  .plan { break-inside: avoid; }
   .cmd, .tbl-wrap, .ladder { break-inside: avoid; }
 }
 </style>
@@ -446,12 +458,12 @@ details.fallback > summary:focus-visible { outline: 3px solid var(--cp-accent); 
       </ol>
     </div>
     <div class="card flow-group">
-      <div class="flow-label"><span class="part-tag d">PART D</span> 할당량이 부족할 때</div>
+      <div class="flow-label"><span class="part-tag d">PART D</span> 쿼타가 아예 없을 때</div>
       <ol class="tiles">
         <li><a href="#stepd1"><span class="num sm d">D1</span><b>증상 구분</b><small>모든 리전 ‘할당량 부족’</small></a></li>
         <li><a href="#stepd2"><span class="num sm d">D2</span><b>티어 확인</b><small>Free Tier인지 REST로</small></a></li>
-        <li><a href="#stepd3"><span class="num sm d">D3</span><b>Tier 1이 되려면</b><small>자동 승급 · 신청 절차 없음</small></a></li>
-        <li><a href="#stepd4"><span class="num sm d">D4</span><b>쿼타 증가 신청</b><small>양식 · Manage › Quota</small></a></li>
+        <li><a href="#stepd3"><span class="num sm d">D3</span><b>쿼타 증가 신청</b><small>양식 · Justification</small></a></li>
+        <li><a href="#stepd4"><span class="num sm d">D4</span><b>기다리는 동안</b><small>자동 승급 · 재배포</small></a></li>
       </ol>
     </div>
   </div>
@@ -466,7 +478,7 @@ details.fallback > summary:focus-visible { outline: 3px solid var(--cp-accent); 
       <li><span class="ck">✓</span><div><b>사업자등록번호</b><span class="t">국가를 Korea로 선택하면 가입 Step 3에서 <b>Tax information(BRN)</b> 입력이 필수(*)로 표시됩니다. 번호를 미리 준비하세요.</span></div></li>
       <li><span class="ck">✓</span><div><b>배포 권한</b><span class="t">Foundry 리소스를 만들 리소스 그룹의 <b>Contributor 또는 Owner</b> 역할. 구독 Owner·Contributor 역할에는 Marketplace 구독 권한이 포함됩니다.</span></div></li>
       <li><span class="ck no">✕</span><div><b>Claude를 쓸 수 없는 구독</b><span class="t">Enterprise Accounts located in South Korea, CSP 구독, 무료 체험·학생·크레딧 전용(결제 수단 없음) 구독. 그래서 이 가이드는 <b>Web Direct 구독을 따로</b> 만듭니다.</span></div></li>
-      <li><span class="ck warn">!</span><div><b>새 구독의 Claude 할당량</b><span class="t">새로 만든 구독은 Claude 쿼타가 <b>0</b>일 수 있어 배포 창에서 모든 리전이 ‘할당량 부족’으로 보일 수 있습니다. 구독 티어에 따라 달라지며, 확인과 신청 방법은 <a href="#partD">PART D</a>에 있습니다.</span></div></li>
+      <li><span class="ck warn">!</span><div><b>새 구독의 Claude 할당량</b><span class="t">새로 만든 구독은 Claude 쿼타가 <b>0</b>일 수 있어 배포 창에서 모든 리전이 ‘할당량 부족’으로 보일 수 있습니다. 구독 티어에 따라 달라지며, 확인과 신청 방법은 <a href="#partD">PART D</a>에 있습니다. 일정이 급하면 구독을 만든 직후 PART D의 <a href="#stepd2">D2</a>~<a href="#stepd3">D3</a>를 먼저 진행해 두세요.</span></div></li>
     </ul>
     <p class="src">출처: Microsoft Learn · <a href="https://learn.microsoft.com/azure/foundry/foundry-models/how-to/use-foundry-models-claude">Deploy and use Claude models in Microsoft Foundry</a> (2026-11-01 확인)</p>
   </div>
@@ -857,16 +869,21 @@ details.fallback > summary:focus-visible { outline: 3px solid var(--cp-accent); 
 <!-- ===================== PART D ===================== -->
 <header class="part" id="partD">
   <span class="part-tag d">PART D</span>
-  <h2>막혔을 때 — 모든 리전이 ‘할당량 부족’일 때</h2>
-  <p>Claude 배포 창에서 어느 리전을 골라도 할당량이 부족하다고 나오는 경우입니다. 구독의 Claude 할당량(쿼타)이 0이거나 부족한 상태이며, 새로 만든 구독에서 나타날 수 있습니다.</p>
+  <h2>막혔을 때 — Claude 쿼타가 아예 없을 때</h2>
+  <p>새 구독에서 Claude를 배포하려는데 어느 리전을 골라도 ‘할당량 부족’이 나오는 경우입니다. 구독의 Claude 쿼타가 0이거나 없는 상태이며, 새로 만든 구독에서 나타날 수 있습니다.</p>
   <p class="done"><span class="lab">완료 기준</span><span>Foundry <b>Manage › Quota</b>에서 사용할 Claude 모델의 쿼타가 <b>0보다 크고</b>, 배포 창에서 쿼타 부족 표시 없이 <b>Deploy</b>를 진행할 수 있습니다.</span></p>
 </header>
 
-<div class="callout ok" style="margin-top:0"><span class="lab">먼저 결론</span><div>
-  <p><b>1.</b> 모든 리전이 막혔다면 리전 문제가 아니라 <b>구독 단위의 Claude 쿼타가 0(또는 부족)</b>인 상태입니다. 리전을 바꿔도 해결되지 않습니다.</p>
-  <p><b>2.</b> 원인 후보 중 하나는 구독의 쿼타 티어가 <b>Free Tier</b>인 경우입니다(<a href="#stepd2">STEP D2</a>에서 확인). 티어 승급은 <b>자동</b>이며 문서에 신청 절차가 없습니다(<a href="#stepd3">STEP D3</a>).</p>
-  <p><b>3.</b> 쿼타는 <b>양식으로 증가를 신청</b>할 수 있습니다. 개별 검토이며 승인이 보장되지는 않습니다(<a href="#stepd4">STEP D4</a>).</p>
-</div></div>
+<section class="card plan" aria-labelledby="plan-t">
+  <h3 id="plan-t">쿼타가 0이면 — 이 순서로 하세요</h3>
+  <ol>
+    <li><span class="pn">1</span><div><b>확인</b> — 구독이 Pay-As-You-Go인지, 청구 국가·모델에 문제가 없는지, 쿼타 티어가 Free Tier인지 확인합니다. <a class="go" href="#stepd1">D1</a> · <a class="go" href="#stepd2">D2</a></div></li>
+    <li><span class="pn">2</span><div><b>신청</b> — 기다리지 말고 쿼타 증가 신청 양식을 제출합니다. Justification에 시나리오와 예상 사용량을 구체적으로 씁니다. <a class="go" href="#stepd3">D3</a></div></li>
+    <li><span class="pn">3</span><div><b>대기</b> — 티어 승급은 자동이며 신청 절차가 문서에 없습니다. 그동안 쿼타가 있는 다른 Foundry 모델로 시작하고, 결제를 정상으로 유지하세요. 같은 구독에서 배포를 반복 시도하지 마세요. <a class="go" href="#stepd4">D4</a></div></li>
+    <li><span class="pn">4</span><div><b>승인 뒤</b> — Quota 페이지에서 반영을 확인하고(최대 15분) <a href="#step7">STEP 7~8</a>로 다시 배포합니다. <a class="go" href="#stepd4">D4</a></div></li>
+  </ol>
+  <p class="rule">리전을 바꿔도 해결되지 않습니다. Claude 쿼타는 구독 단위로 관리됩니다. 증가 신청은 개별 심사이며 승인이 보장되지 않고, 문서는 기존 쿼타를 실제로 사용하는 고객을 우선한다고 안내합니다.</p>
+</section>
 
 <section class="card step" id="stepd1" aria-labelledby="stepd1-t">
   <header class="step-h">
@@ -882,7 +899,7 @@ details.fallback > summary:focus-visible { outline: 3px solid var(--cp-accent); 
       <tr class="hit"><td data-l="증상"><b>모든 리전</b>이 ‘할당량 부족’으로 표시</td><td data-l="뜻">구독의 Claude 쿼타가 0이거나 부족합니다.</td><td class="go" data-l="이동"><b>이 PART D</b></td></tr>
       <tr><td data-l="증상">특정 리전에 <b>리전 미지원</b> 경고</td><td data-l="뜻">쿼타와 별개입니다. 그 모델이 그 리전에서 지원되지 않습니다.</td><td class="go" data-l="이동"><a href="https://learn.microsoft.com/azure/foundry/foundry-models/concepts/models-from-partners#region-availability-by-deployment-type">Learn 리전 표</a>에서 지원 리전 선택</td></tr>
       <tr><td data-l="증상">배포 후 <b>Failed</b> · 오류 <code>MarketplaceSubscriptionCannotBeCompleted</code></td><td data-l="뜻">Marketplace가 모델 구독 생성을 거절했습니다.</td><td class="go" data-l="이동"><a href="#partC"><b>PART C</b></a></td></tr>
-      <tr><td data-l="증상">배포 후 호출에서 <b>HTTP 429</b></td><td data-l="뜻">사용 중 한도(레이트 리밋)를 넘었습니다.</td><td class="go" data-l="이동"><a href="#stepd4">STEP D4</a> 끝의 429 안내</td></tr>
+      <tr><td data-l="증상">배포 후 호출에서 <b>HTTP 429</b></td><td data-l="뜻">사용 중 한도(레이트 리밋)를 넘었습니다.</td><td class="go" data-l="이동"><a href="#stepd4">STEP D4</a>의 429 안내</td></tr>
     </tbody>
   </table></div>
 
@@ -891,13 +908,15 @@ details.fallback > summary:focus-visible { outline: 3px solid var(--cp-accent); 
   </div></div>
 
   <div class="sub">
-    <h4 class="sub-h"><span class="tag">먼저 점검</span> 쿼타가 0으로 보이는 이유 중 확인이 쉬운 2가지</h4>
+    <h4 class="sub-h"><span class="tag">먼저 점검</span> 쿼타가 0으로 보이는 이유 중 확인이 쉬운 3가지</h4>
     <ol class="stepsol">
-      <li><div><b>구독 유형</b> — Claude의 기본 한도는 구독 유형별로 다르고, <b>무료 체험(Free Trial)은 모든 Claude 모델이 0</b>입니다. 무료 체험·학생·크레딧 전용 구독은 Claude 지원 대상도 아닙니다(<a href="#precheck">시작 전 확인</a>). <a href="#step2">STEP 2</a>에서 <b>Pay-As-You-Go</b>를 골라 만든 구독인지 확인하세요.</div></li>
+      <li><div><b>구독 유형·결제 수단</b> — Claude는 결제 수단이 활성화된 <b>Pay-As-You-Go</b> 구독에서 쓸 수 있습니다. <b>무료 체험(Free Trial)은 모든 Claude 모델의 기본 한도가 0</b>이고, 무료 체험·학생·크레딧 전용 구독은 지원 대상도 아닙니다(<a href="#precheck">시작 전 확인</a>). <a href="#step2">STEP 2</a>에서 <b>Pay-As-You-Go</b>를 골라 만든 구독인지 확인하세요.</div></li>
+      <li><div><b>청구 국가·지역</b> — Learn은 Anthropic이 모델을 판매하는 국가·지역에 청구 계정이 있어야 한다고 합니다. <b>South Korea</b>는 <a href="https://aka.ms/supported_anthropic_regions">Anthropic 지원 국가 목록</a>에 있습니다(2026-11-01 확인). Marketplace 구매는 한국에서 <b>신용카드</b>가 지원되고 <b>EA·CSP</b>는 지원되지 않는다고 <a href="https://learn.microsoft.com/partner-center/marketplace-offers/marketplace-geo-availability-currencies">Partner Center</a>가 안내합니다.</div></li>
       <li><div><b>모델</b> — 일부 모델은 Pay-as-you-go 기본값도 0입니다(예: <code>claude-fable-5</code>, <code>claude-fable-5-1</code>). <code>claude-sonnet-5-5</code> 같은 다른 모델로 바꿔 배포 창을 다시 확인해 보세요.</div></li>
     </ol>
     <div class="callout warn"><span class="lab">그래도 0이면</span><div>
       <p>Learn 표대로라면 Pay-as-you-go 구독은 대부분의 모델에서 기본 한도가 0이 아닙니다. 그런데도 0이면, Learn의 문제 해결 표는 원인으로 <b>구독 유형·청구 지역 미지원</b> 또는 <b>‘구독 티어’의 기본 쿼타가 0</b>인 경우를 듭니다. 다음 단계에서 티어를 확인하세요 → <a href="#stepd2">STEP D2</a></p>
+      <p>참고: 이 가이드로 만든 구독의 Plan은 ‘Azure Plan’(MCA 기반, <a href="#step4">STEP 4</a>)입니다. 이 구독이 Learn 표의 ‘Pay-as-you-go’ 열에 해당하는지는 문서에 명시되어 있지 않습니다.</p>
     </div></div>
 
     <details class="fallback">
@@ -916,7 +935,7 @@ details.fallback > summary:focus-visible { outline: 3px solid var(--cp-accent); 
       </div>
     </details>
   </div>
-  <p class="src">출처: <a href="https://learn.microsoft.com/azure/foundry/foundry-models/concepts/claude-models-quotas-limits">Learn: Claude Model Quotas and Rate Limits</a> · <a href="https://learn.microsoft.com/azure/foundry/foundry-models/how-to/use-foundry-models-claude">Learn: Deploy and use Claude models (Troubleshooting)</a></p>
+  <p class="src">출처: <a href="https://learn.microsoft.com/azure/foundry/foundry-models/concepts/claude-models-quotas-limits">Learn: Claude Model Quotas and Rate Limits</a> · <a href="https://learn.microsoft.com/azure/foundry/foundry-models/how-to/use-foundry-models-claude">Learn: Deploy and use Claude models (Prerequisites · Troubleshooting)</a> · <a href="https://learn.microsoft.com/partner-center/marketplace-offers/marketplace-geo-availability-currencies">Learn: Marketplace geographic availability</a></p>
 </section>
 
 <section class="card step" id="stepd2" aria-labelledby="stepd2-t">
@@ -975,17 +994,17 @@ details.fallback > summary:focus-visible { outline: 3px solid var(--cp-accent); 
       <thead><tr><th>필드</th><th>뜻 (Learn)</th><th>읽는 법</th></tr></thead>
       <tbody>
         <tr><td class="fld" data-l="필드"><code>currentTierName</code></td><td data-l="뜻">구독의 현재 쿼타 티어</td><td data-l="읽는 법"><b>Free-Tier</b>는 아직 Free Tier, <b>Tier-1</b> 이상은 승급된 상태</td></tr>
-        <tr><td class="fld" data-l="필드"><code>tierUpgradePolicy</code></td><td data-l="뜻"><code>OnceUpgradeIsAvailable</code> 승급 가능해지면 자동 승급 · <code>NoAutoUpgrade</code> 자동 승급 끔</td><td data-l="읽는 법"><code>NoAutoUpgrade</code>이면 자동 승급이 꺼진 상태(<a href="#stepd3">STEP D3</a>)</td></tr>
+        <tr><td class="fld" data-l="필드"><code>tierUpgradePolicy</code></td><td data-l="뜻"><code>OnceUpgradeIsAvailable</code> 승급 가능해지면 자동 승급 · <code>NoAutoUpgrade</code> 자동 승급 끔</td><td data-l="읽는 법"><code>NoAutoUpgrade</code>이면 자동 승급이 꺼진 상태(<a href="#stepd4">STEP D4</a>)</td></tr>
         <tr><td class="fld" data-l="필드"><code>nextTierName</code></td><td data-l="뜻">다음 쿼타 티어</td><td data-l="읽는 법">승급하면 가게 될 티어</td></tr>
         <tr><td class="fld" data-l="필드"><code>upgradeAvailabilityStatus</code></td><td data-l="뜻">다음 티어로 승급할 수 있는지(<code>Available</code> · <code>NotAvailable</code>)</td><td data-l="읽는 법"><code>NotAvailable</code>이면 아래 사유 필드를 봅니다</td></tr>
         <tr><td class="fld" data-l="필드"><code>upgradeApplicableDate</code></td><td data-l="뜻">정책이 <code>OnceUpgradeIsAvailable</code>일 때, 이 날짜(UTC) 이후 다음 티어로 승급</td><td data-l="읽는 법">날짜가 있으면 그 이후 다시 확인</td></tr>
-        <tr><td class="fld" data-l="필드"><code>upgradeUnavailabilityReason</code></td><td data-l="뜻">다음 티어로 승급할 수 없는 경우의 사유</td><td data-l="읽는 법">보이면 지원 요청에 함께 적기</td></tr>
+        <tr><td class="fld" data-l="필드"><code>upgradeUnavailabilityReason</code></td><td data-l="뜻">다음 티어로 승급할 수 없는 경우의 사유</td><td data-l="읽는 법">보이면 신청서·지원 요청에 함께 적기</td></tr>
       </tbody>
     </table></div>
 
     <div class="callout ok"><span class="lab">판단</span><div>
-      <p><b>Free-Tier</b>이면 쿼타 0의 원인 후보가 맞습니다 → <a href="#stepd3">STEP D3</a>(승급) · <a href="#stepd4">STEP D4</a>(증가 신청)</p>
-      <p><b>Tier-1 이상</b>인데도 0이면 모델별 기본값, 또는 일부 모델이 더 높은 티어를 요구하는 경우일 수 있습니다(Learn). <a href="#stepd1">STEP D1</a>을 다시 보고 <a href="#stepd4">STEP D4</a>로 증가를 신청하세요.</p>
+      <p><b>Free-Tier</b>이면 쿼타 0의 원인 후보가 맞습니다 → <a href="#stepd3">STEP D3</a>(신청) · <a href="#stepd4">STEP D4</a>(대기·승급)</p>
+      <p><b>Tier-1 이상</b>인데도 0이면 모델별 기본값, 또는 일부 모델이 더 높은 티어를 요구하는 경우일 수 있습니다(Learn). <a href="#stepd1">STEP D1</a>을 다시 보고 <a href="#stepd3">STEP D3</a>으로 신청하세요.</p>
     </div></div>
     <div class="callout warn"><span class="lab">프리뷰</span><div>
       <p>이 확인 API는 프리뷰(<code>2025-10-01-preview</code>)여서 명령과 응답이 바뀔 수 있습니다. 명령이 실패하면 오류 메시지 전문을 보관해 지원 요청에 첨부하세요.</p>
@@ -997,83 +1016,102 @@ details.fallback > summary:focus-visible { outline: 3px solid var(--cp-accent); 
 <section class="card step" id="stepd3" aria-labelledby="stepd3-t">
   <header class="step-h">
     <span class="num d">D3</span>
-    <h3 id="stepd3-t">Tier 1이 되려면 — 승급은 자동입니다</h3>
-    <span class="where">Microsoft 자동 평가</span>
+    <h3 id="stepd3-t">쿼타 증가 신청 — 기다리지 말고 바로</h3>
+    <span class="where">신청 양식</span>
   </header>
-  <p class="do">Learn의 쿼타 티어 문서에는 티어 승급을 <b>신청하는 방법이 없습니다</b>. 승급은 Microsoft가 구독 단위로 평가해 <b>자동</b>으로 처리합니다. 고객이 할 일은 승급 상태를 확인하고, 기다리는 동안 다른 방법으로 쿼타를 확보하는 것입니다.</p>
+  <p class="do">쿼타가 0이어도 <b>쿼타 증가 신청 양식</b>을 제출할 수 있습니다. Learn은 이 양식이 Foundry Models, Azure OpenAI, <b>Anthropic(Claude) 모델</b>의 쿼타 증가 요청에 쓰인다고 안내합니다. <a href="https://aka.ms/oai/stuquotarequest">aka.ms/oai/stuquotarequest</a>를 엽니다. 승인되면 <b>티어는 그대로</b>이고 쿼타만 추가됩니다(쿼타 증가는 티어 승급이 아닙니다).</p>
 
-  <div class="choice">
-    <div class="opt warn">
-      <b>Learn이 말하는 승급 기준</b>
-      <p><b>사용량 추이</b> — 주로 Foundry Models 전반의 소비 추이입니다. 사용량이 늘어 현재 티어가 사용을 제한하면 다음 티어로 승급할 수 있습니다.</p>
-      <p><b>결제 이력</b> — 승급 자격을 판단할 때 함께 봅니다.</p>
-      <p><b>Microsoft와의 관계</b> — EA·MCA-E 같은 엔터프라이즈 관계는 더 높은 티어 배정에 영향을 줍니다.</p>
-    </div>
-    <div class="opt ok">
-      <b>고객이 할 수 있는 일</b>
-      <p><b>1. 상태 확인</b> — <a href="#stepd2">STEP D2</a>의 <code>upgradeAvailabilityStatus</code> · <code>upgradeApplicableDate</code> · <code>upgradeUnavailabilityReason</code>이 승급 가능 여부·예정일·불가 사유를 알려 줍니다.</p>
-      <p><b>2. 결제 이력 관리</b> — 결제 수단을 유효하게 유지하고 청구가 정상 결제되게 합니다.</p>
-      <p><b>3. 지금 티어에서 쓸 수 있는 모델로 시작</b> — Learn은 모델이 더 높은 티어를 요구하면 승급 자격을 갖출 때까지 현재 티어에서 쓸 수 있는 모델을 쓰라고 안내합니다. Foundry <b>Quota</b> 페이지에서 구독에 쿼타가 있는 모델을 확인할 수 있습니다.</p>
-      <p><b>4. 기다릴 수 없으면 쿼타 증가 신청</b> — 티어는 그대로이고 쿼타만 추가됩니다 → <a href="#stepd4">STEP D4</a></p>
+  <div class="split">
+    <figure class="shot"><button class="zoom" type="button" title="클릭하면 크게 봅니다"><img src="assets/stepd3-quota-form.webp" width="850" height="1336" loading="lazy" decoding="async" alt="Microsoft Foundry Service: Request for Quota Increase 양식의 1쪽. 1 안내문, 2 Subscription Id, 3 Justification, 4 Quota Type, 5 Page 1 of 3. 1~8번 항목은 생략"></button></figure>
+    <div class="side">
+      <ol class="legend">
+        <li><i class="pin">1</i><div><b>안내문</b> — 표준(standard) 배포 유형의 쿼타 증가 요청 양식입니다. 접수 순서대로 처리하고, <b>기존 쿼타를 실제로 사용하는 고객을 우선</b>하며, 이 조건에 맞지 않으면 거절될 수 있다고 안내합니다.</div></li>
+        <li><i class="pin">2</i><div><b>Subscription Id</b> — 쿼타를 올릴 구독의 ID입니다(<a href="#stepd2">STEP D2</a>에서 복사한 값).</div></li>
+        <li><i class="pin">3</i><div><b>Justification</b> — 시나리오와 예상 사용량을 <b>자세히</b> 쓰라고 안내합니다. 아래 템플릿을 쓰세요.</div></li>
+        <li><i class="pin">4</i><div><b>Quota Type</b> — 필수 선택입니다. Claude 모델 배포는 <b>Model Deployment (PTU/RPM/TPM)</b>에 해당하는 것으로 보입니다.</div></li>
+        <li><i class="pin">5</i><div><b>Page 1 of 3</b> — 양식은 3쪽입니다. 2~3쪽은 이 가이드에서 확인하지 못했습니다.</div></li>
+      </ol>
+      <div class="callout tip"><span class="lab">생략한 항목</span><div>
+        <p>그림에서 <b>1~8번</b>(이름, 회사 이메일, 회사 이름·주소·도시·우편번호·국가)은 생략했습니다. 모두 필수이며 <b>회사 이메일</b>을 입력합니다.</p>
+      </div></div>
     </div>
   </div>
 
-  <div class="callout warn"><span class="lab">문서에 없음</span><div>
-    <p>승급에 필요한 사용량·기간 같은 <b>수치</b>와, Free Tier에서 Tier 1까지 <b>걸리는 시간</b>은 Learn의 쿼타 티어 문서에 없습니다. ‘며칠 뒤 승급’처럼 약속할 수 없습니다. <code>upgradeApplicableDate</code>가 보이면 그 날짜(UTC) 이후가 문서상 승급 시점입니다.</p>
+  <div class="sub">
+    <h4 class="sub-h"><span class="tag">준비</span> 양식을 열기 전에 정리해 둘 것</h4>
+    <ul class="req">
+      <li>회사 정보(이름 · 주소 · 도시 · 우편번호 · 국가)</li><li>회사 이메일</li><li>Subscription ID</li><li>모델 · 배포 유형(Global Standard / Data Zone Standard)</li><li>필요한 RPM · ITPM · OTPM</li><li>사용 시나리오 · 예상 사용량</li>
+    </ul>
+    <p class="src" style="margin-top:8px">앞의 세 가지는 1쪽에서 확인한 항목이고, 나머지는 2~3쪽을 확인하지 못해 미리 정리해 두면 좋은 정보입니다.</p>
+  </div>
+
+  <div class="sub">
+    <h4 class="sub-h"><span class="tag">작성</span> Justification 템플릿</h4>
+    <p style="margin:10px 0 0">양식이 영문이므로 영문으로 쓰는 편이 무난합니다(한국어 입력 가능 여부는 확인하지 못했습니다). <code>&lt; &gt;</code> 안을 채웁니다. 한도 단위는 <b>RPM</b>=분당 요청 수, <b>ITPM</b>=캐시에서 읽지 않은 입력 토큰/분, <b>OTPM</b>=출력 토큰/분입니다(Learn).</p>
+    <div class="cmd">
+      <div class="cmd-h"><span>영문 템플릿 · 값만 바꿔서 붙여 넣기</span><button class="copy" type="button" aria-live="polite">복사</button></div>
+      <pre><code>Scenario: &lt;what you are building and who will use it&gt;
+Model / deployment type: claude-sonnet-5-5, Global Standard
+Requested limits: RPM &lt;n&gt;, ITPM &lt;n&gt;, OTPM &lt;n&gt;
+How estimated: &lt;peak users&gt; x &lt;requests per minute per user&gt;; avg &lt;n&gt; input and &lt;n&gt; output tokens per request
+Timeline: PoC starts &lt;date&gt;; production target &lt;date&gt;
+Current status: Pay-As-You-Go subscription (billing country: Korea). Claude quota is 0 in every region. Quota tier: &lt;currentTierName from STEP D2&gt;.</code></pre>
+    </div>
+  </div>
+
+  <div class="callout warn"><span class="lab">승인 조건</span><div>
+    <p>Learn: 쿼타 증가 요청은 <b>개별 평가</b>되며 <b>승인이 보장되지 않습니다</b>. 접수 순서대로 처리하고 <b>기존 쿼타를 실제로 사용 중인 고객을 우선</b>합니다. 쿼타가 0이면 이 조건을 충족하기 어려울 수 있으므로 Justification을 구체적으로 쓰고 <a href="#stepd4">STEP D4</a>의 ‘기다리는 동안’도 함께 진행하세요. 처리 시간은 문서에 없습니다.</p>
   </div></div>
-  <div class="callout tip"><span class="lab">추정</span><div>
-    <p>Learn은 초기 티어가 사용량과 Microsoft와의 관계(EA·MCA-E 등)를 고려해 정해진다고만 설명합니다. 새로 만든 구독은 사용 이력이 없어 낮은 티어에서 시작할 수 있습니다. 문서에 명시된 내용이 아닌 추정입니다.</p>
+  <div class="callout tip"><span class="lab">다른 경로</span><div>
+    <p><b>포털에서</b> — <b>ai.azure.com</b>에서 <b>New Foundry</b>를 켠 뒤 <span class="ui">Manage</span> › <span class="ui">Quota</span> › <span class="ui">Token per minute</span> 탭에서 항목을 선택하고 <span class="ui">Request quota</span>를 누릅니다(Learn 기준). Quota 페이지에 Claude 모델이 보이지 않으면 위 양식을 쓰세요.</p>
+    <p><b>문의</b> — 양식 아래쪽의 <b>contact us</b> 링크로 신청 관련 문의를 할 수 있습니다. 양식이 열리지 않거나 진행 상황을 알아야 하면 <a href="#stepc3">PART C의 지원 요청</a> 절차(Subscription management)도 쓸 수 있고, 구독 관리 지원은 쿼타 조정을 포함해 제한 없이 제공된다고 Learn에 있습니다. 다만 Foundry 모델 쿼타를 이 경로로 처리하는지는 문서에 없습니다.</p>
   </div></div>
-  <div class="callout danger"><span class="lab">설정 금지</span><div>
-    <p><code>tierUpgradePolicy</code>를 <code>NoAutoUpgrade</code>로 바꾸지 마세요. 구독을 현재 티어에 묶어 두는 <b>프리뷰</b> 옵션이라 자동 승급이 멈춥니다(Learn은 쿼타를 비용 관리 도구로 권장하지 않는다고 안내합니다). D2 결과가 이미 <code>NoAutoUpgrade</code>라면 누가 설정했는지 구독 관리자에게 확인하세요.</p>
-  </div></div>
-  <p class="src">출처: <a href="https://learn.microsoft.com/azure/foundry/foundry-models/quotas-limits">Learn: Foundry Models quotas and limits (Quota tiers)</a> · <a href="https://learn.microsoft.com/azure/foundry/foundry-models/concepts/claude-models-quotas-limits">Learn: Claude Model Quotas and Rate Limits</a></p>
+  <p class="src">출처: <a href="https://aka.ms/oai/stuquotarequest">쿼타 증가 신청 양식(2026-11-01 확인)</a> · <a href="https://learn.microsoft.com/azure/foundry/openai/how-to/quota">Learn: Manage Foundry Models quota</a> · <a href="https://learn.microsoft.com/azure/foundry/foundry-models/concepts/claude-models-quotas-limits">Learn: Claude Model Quotas and Rate Limits</a> · <a href="https://learn.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request">Learn: How to create an Azure support request</a></p>
 </section>
 
 <section class="card step" id="stepd4" aria-labelledby="stepd4-t">
   <header class="step-h">
     <span class="num d">D4</span>
-    <h3 id="stepd4-t">쿼타 증가 신청 — 쿼타가 0이어도, 조금 생긴 뒤에도</h3>
-    <span class="where">신청 양식 · Foundry</span>
+    <h3 id="stepd4-t">기다리는 동안 · 티어 승급 · 승인 뒤</h3>
+    <span class="where">Azure · Foundry</span>
   </header>
-  <p class="do">쿼타가 없어도, 일부 있어도 <b>쿼타 증가 신청 양식</b>으로 더 요청할 수 있습니다. Learn은 이 양식이 <b>Anthropic(Claude) 모델</b>을 포함한다고 안내합니다. 승인되면 <b>티어는 그대로</b>이고 쿼타만 추가됩니다. 쿼타 증가는 티어 승급이 아닙니다.</p>
+  <p class="do">승인까지 걸리는 시간은 문서에 없습니다. 기다리는 동안 할 일과 하지 말 일, 티어 승급이 일어나는 방식, 쿼타가 생긴 뒤 할 일입니다.</p>
 
   <div class="choice">
     <div class="opt ok">
-      <b>방법 1 — 양식으로 신청</b>
-      <p><a href="https://aka.ms/oai/stuquotarequest">aka.ms/oai/stuquotarequest</a>를 열어 양식을 작성합니다. Quota 페이지에 Claude 모델이 보이지 않을 때도 쓸 수 있습니다.</p>
+      <b>기다리는 동안 할 일</b>
+      <p><b>1. 티어 상태 확인</b> — <a href="#stepd2">STEP D2</a>의 <code>upgradeAvailabilityStatus</code> · <code>upgradeApplicableDate</code> · <code>upgradeUnavailabilityReason</code>이 승급 가능 여부·예정일·불가 사유를 알려 줍니다.</p>
+      <p><b>2. 쿼타가 있는 다른 Foundry 모델로 시작</b> — 승급은 <b>Foundry Models 전반</b>의 사용 추이를 본다고 하며, Learn은 승급 자격을 갖출 때까지 현재 티어에서 쓸 수 있는 모델을 쓰라고 안내합니다. 구독에 쿼타가 있는 모델은 Foundry <b>Quota</b> 페이지에서 확인합니다.<span class="note">예: Learn의 Azure OpenAI 티어 표에서 Tier 0(Free Tier로 보임)에는 gpt-4.1-mini · gpt-5-mini · o4-mini · text-embedding-3-small이 있습니다. 사용한 만큼 요금이 청구됩니다.</span></p>
+      <p><b>3. 결제 정상 유지</b> — 결제 이력은 승급 자격을 판단하는 요소입니다.</p>
     </div>
-    <div class="opt ok">
-      <b>방법 2 — Foundry 포털에서</b>
-      <p><b>ai.azure.com</b>에서 <b>New Foundry</b>를 켠 뒤 오른쪽 위 <span class="ui">Manage</span> › 왼쪽 <span class="ui">Quota</span> › <span class="ui">Token per minute</span> 탭에서 항목을 선택하고, 오른쪽 위 <span class="ui">Request quota</span>를 누릅니다.</p>
+    <div class="opt warn">
+      <b>하지 말 일</b>
+      <p><b>NoAutoUpgrade 설정</b> — <code>tierUpgradePolicy</code>를 <code>NoAutoUpgrade</code>로 바꾸면 자동 승급이 멈춥니다(프리뷰 옵션). 이미 이 값이면 설정한 담당자에게 확인하세요.</p>
+      <p><b>배포 반복 시도</b> — 모델 구독을 너무 자주 시도하거나 여러 구독에서 동시에 시도하면 Marketplace가 거절할 수 있습니다(<a href="#partC">PART C</a>). 새 구독을 또 만들어도 같은 처지일 수 있습니다(추정).</p>
+      <p><b>리전 바꿔 가며 시도</b> — 쿼타가 구독 단위라 의미가 없습니다.</p>
     </div>
   </div>
 
   <div class="sub">
-    <h4 class="sub-h"><span class="tag">신청 전</span> 알아두고 준비할 것</h4>
-    <ul class="req">
-      <li>Subscription ID</li><li>모델 · 배포 유형(Global Standard / Data Zone Standard)</li><li>필요한 RPM · ITPM · OTPM</li><li>사용 목적</li>
-    </ul>
-    <p class="src" style="margin-top:8px">양식의 실제 항목은 확인하지 못했습니다. 위 정보를 미리 정리해 두면 어떤 항목이 나와도 답하기 쉽습니다.</p>
-    <div class="callout warn"><span class="lab">승인 조건</span><div>
-      <p>Learn: 쿼타 증가 요청은 <b>개별 평가</b>되며 <b>승인이 보장되지 않습니다</b>. 접수 순서대로 처리하고 <b>기존 쿼타를 실제로 사용 중인 고객을 우선</b>하며, 이 조건에 맞지 않으면 거절될 수 있습니다. 처리 시간은 문서에 없습니다.</p>
-      <p>이미 일부 쿼타가 있다면 그 쿼타로 먼저 배포해 실제로 사용한 뒤 신청하는 것이 ‘사용 중인 고객 우선’ 기준에 부합합니다.</p>
+    <h4 class="sub-h"><span class="tag">Tier 1이 되려면</span> 승급은 자동입니다</h4>
+    <p style="margin:10px 0 0">Learn의 쿼타 티어 문서에는 티어 승급을 <b>신청하는 방법이 없습니다</b>. Microsoft가 구독 단위로 평가해 자동으로 올리며, 평가에는 <b>Foundry Models 전반의 사용 추이</b>(사용량이 늘어 현재 티어가 사용을 제한하면 승급), <b>결제 이력</b>, <b>Microsoft와의 관계</b>(EA·MCA-E 같은 엔터프라이즈 관계는 더 높은 티어 배정에 영향)가 쓰입니다.</p>
+    <div class="callout warn"><span class="lab">문서에 없음</span><div>
+      <p>승급에 필요한 사용량·기간 같은 <b>수치</b>와, Free Tier에서 Tier 1까지 <b>걸리는 시간</b>은 Learn의 쿼타 티어 문서에 없습니다. ‘며칠 뒤 승급’처럼 약속할 수 없습니다. <code>upgradeApplicableDate</code>가 보이면 그 날짜(UTC) 이후가 문서상 승급 시점입니다.</p>
+    </div></div>
+    <div class="callout tip"><span class="lab">추정</span><div>
+      <p>Learn은 초기 티어가 사용량과 Microsoft와의 관계(EA·MCA-E 등)를 고려해 정해진다고만 설명합니다. 새로 만든 구독은 사용 이력이 없어 낮은 티어에서 시작할 수 있습니다. 문서에 명시된 내용이 아닌 추정입니다.</p>
     </div></div>
   </div>
 
   <div class="sub">
-    <h4 class="sub-h"><span class="tag">신청 후</span> 반영 확인과 재배포</h4>
+    <h4 class="sub-h"><span class="tag">승인 뒤</span> 반영 확인과 재배포</h4>
     <ol class="stepsol">
       <li><div><b>반영 기다리기</b> — Learn: 요청을 제출하거나 할당을 수정한 뒤 반영까지 최대 15분이 걸릴 수 있습니다. Quota 페이지를 새로고침해 쿼타를 확인합니다. 심사 자체에 걸리는 시간은 문서에 없습니다.</div></li>
       <li><div><b>다시 배포</b> — <a href="#step7">STEP 7~8</a>을 다시 진행합니다. 리전은 모델이 지원되는 곳을 고르세요(<a href="https://learn.microsoft.com/azure/foundry/foundry-models/concepts/models-from-partners#region-availability-by-deployment-type">Learn 리전 표</a>).</div></li>
-      <li><div><b>429가 나오면</b> — 사용 중 한도를 넘으면 HTTP 429가 반환됩니다. 지수 백오프(exponential backoff)로 재시도하고 요청 빈도·토큰 사용을 줄이며, 그래도 모자라면 이 단계를 반복해 증가를 신청합니다.</div></li>
+      <li><div><b>429가 나오면</b> — 사용 중 한도를 넘으면 HTTP 429가 반환됩니다. 지수 백오프(exponential backoff)로 재시도하고 요청 빈도·토큰 사용을 줄이며, 그래도 모자라면 <a href="#stepd3">STEP D3</a>을 반복해 증가를 신청합니다.</div></li>
     </ol>
   </div>
-
-  <div class="callout tip"><span class="lab">보조 경로</span><div>
-    <p>양식이 열리지 않거나 진행 상황을 문의해야 하면 <a href="#stepc3">PART C의 지원 요청</a> 절차(Subscription management)로 문의할 수 있습니다. 구독 관리 지원은 쿼타 조정을 포함해 제한 없이 제공된다고 Learn에 있습니다. 다만 Foundry 모델 쿼타를 이 경로로 처리하는지는 문서에 명시되어 있지 않습니다.</p>
-  </div></div>
-  <p class="src">출처: <a href="https://learn.microsoft.com/azure/foundry/openai/how-to/quota">Learn: Manage Foundry Models quota</a> · <a href="https://learn.microsoft.com/azure/foundry/foundry-models/concepts/claude-models-quotas-limits">Learn: Claude Model Quotas and Rate Limits</a> · <a href="https://learn.microsoft.com/azure/azure-portal/supportability/how-to-create-azure-support-request">Learn: How to create an Azure support request</a></p>
+  <p class="src">출처: <a href="https://learn.microsoft.com/azure/foundry/foundry-models/quotas-limits">Learn: Foundry Models quotas and limits (Quota tiers)</a> · <a href="https://learn.microsoft.com/azure/foundry/foundry-models/concepts/claude-models-quotas-limits">Learn: Claude Model Quotas and Rate Limits</a> · <a href="https://learn.microsoft.com/azure/foundry/foundry-models/concepts/models-from-partners">Learn: Foundry Models from partners and community (Troubleshooting)</a></p>
 </section>
 
 <section class="block" id="refs" aria-labelledby="refs-t">
@@ -1090,6 +1128,9 @@ details.fallback > summary:focus-visible { outline: 3px solid var(--cp-accent); 
     <li><a href="https://learn.microsoft.com/rest/api/microsoftfoundry/accountmanagement/quota-tiers/get?view=rest-microsoftfoundry-accountmanagement-2025-10-01-preview">Quota Tiers - Get (REST)</a> — 티어 확인 API(프리뷰)<span class="u">https://learn.microsoft.com/rest/api/microsoftfoundry/accountmanagement/quota-tiers/get?view=rest-microsoftfoundry-accountmanagement-2025-10-01-preview</span></li>
     <li><a href="https://learn.microsoft.com/azure/cloud-shell/get-started/ephemeral">Get started with Azure Cloud Shell ephemeral sessions</a><span class="u">https://learn.microsoft.com/azure/cloud-shell/get-started/ephemeral</span></li>
     <li><a href="https://aka.ms/oai/stuquotarequest">쿼타 증가 신청 양식</a> — Anthropic 모델 포함<span class="u">https://aka.ms/oai/stuquotarequest</span></li>
+    <li><a href="https://learn.microsoft.com/partner-center/marketplace-offers/marketplace-geo-availability-currencies">Marketplace geographic availability and currencies</a> — 한국 Marketplace 구매(신용카드 지원 · EA·CSP 미지원)<span class="u">https://learn.microsoft.com/partner-center/marketplace-offers/marketplace-geo-availability-currencies</span></li>
+    <li><a href="https://aka.ms/supported_anthropic_regions">Anthropic Supported Regions Policy</a> — Learn이 안내하는 외부 문서<span class="u">https://aka.ms/supported_anthropic_regions</span></li>
+    <li><a href="https://learn.microsoft.com/azure/foundry/openai/quotas-limits">Azure OpenAI quotas and limits</a> — 쿼타 티어 표(Tier 0~6)<span class="u">https://learn.microsoft.com/azure/foundry/openai/quotas-limits</span></li>
   </ul>
 
   <div class="unverified">
@@ -1101,18 +1142,19 @@ details.fallback > summary:focus-visible { outline: 3px solid var(--cp-accent); 
       <li><b>지원 팀이 취한 조치</b> — 답변은 배포를 막던 원인을 해결했다는 안내뿐이었습니다. 오류 문구가 언급한 allowlist 처리였는지는 확인하지 못했습니다.</li>
       <li><b>약관 동의 직후의 배포 설정 화면</b>(배포 이름 · Region scope) — 화면은 담지 못했고, 설명은 Learn 기준입니다.</li>
       <li><b>PART A와 STEP 5의 화면</b> — 2026-10-27~28에 촬영했고 2026-10-30에 다시 확인하지 않았습니다. Foundry 화면(STEP 6~8)은 2026-10-30에 다시 확인했습니다.</li>
-      <li><b>PART D의 근거</b> — 화면 캡처 없이 Microsoft Learn(2026-11-01 확인)만 근거로 썼습니다. 고객 환경의 화면은 확인하거나 사용하지 않았고, 이 가이드의 구독에서 명령을 실행해 확인한 것도 아닙니다.</li>
-      <li><b>Claude와 쿼타 티어의 관계</b> — Learn에는 Claude의 티어별 기본 쿼타 표가 없습니다. ‘Free Tier이면 Claude 쿼타가 0’은 Learn의 문제 해결 표(‘구독 티어의 기본 쿼타가 0’)와 다른 모델의 티어 표에서 짐작한 가설입니다.</li>
-      <li><b>티어 승급 기준·소요 시간, 신규 구독의 초기 티어</b> — 문서에 수치와 기간이 없습니다.</li>
+      <li><b>PART D의 근거</b> — Microsoft Learn(2026-11-01 확인)과 쿼타 증가 양식 1쪽 화면(STEP D3)을 근거로 썼습니다. 고객 환경의 화면은 확인하거나 사용하지 않았고, 이 가이드의 구독에서 Quota 페이지를 열거나 명령을 실행해 확인한 것도 아닙니다.</li>
+      <li><b>Claude 한도와 구독·티어의 대응</b> — Learn에는 Claude의 티어별 기본 쿼타 표가 없습니다. ‘Free Tier이면 Claude 쿼타가 0’은 Learn의 문제 해결 표(‘구독 티어의 기본 쿼타가 0’)와 다른 모델의 티어 표에서 짐작한 가설입니다. 이 가이드로 만든 ‘Azure Plan’(MCA 기반) 구독이 한도 표의 ‘Pay-as-you-go’ 열에 해당하는지, Azure OpenAI 표의 Tier 0이 Free Tier인지도 문서에 명시되어 있지 않습니다.</li>
+      <li><b>티어 승급 기준·소요 시간, 신규 구독의 초기 티어, 쿼타가 0인 구독의 승인 기준</b> — 문서에 없습니다. 문서는 ‘기존 쿼타를 실제로 사용하는 고객 우선’만 설명합니다.</li>
       <li><b>티어 확인 명령</b> — 프리뷰 API이며 필요한 권한(역할)이 문서에 명시되어 있지 않습니다.</li>
-      <li><b>쿼타 증가 양식의 항목·처리 시간</b>, 그리고 <b>Manage › Quota에 Claude 모델 항목이 표시되는지</b> — 확인하지 못했습니다. 메뉴 이름은 Learn 기준입니다.</li>
+      <li><b>쿼타 증가 양식</b> — 1쪽(회사 정보 · Subscription Id · Justification · Quota Type)만 확인했습니다. 총 3쪽이며 2~3쪽 항목과 처리 시간은 확인하지 못했고, Quota Type 중 Claude에 해당하는 항목은 추정입니다. Manage › Quota에 Claude 모델 항목이 표시되는지도 확인하지 못했습니다(메뉴 이름은 Learn 기준).</li>
+      <li><b>Anthropic 지원 국가 목록</b> — Learn이 안내하는 외부 문서이며 2026-11-01에 확인했습니다(문서에 표시된 시행일은 2026-11-12). 바뀔 수 있습니다.</li>
     </ul>
   </div>
 </section>
 
 <div class="foot">
-  <p><b>화면 캡처 안내</b> — 화면은 Contoso 예시 테넌트에서 촬영했습니다. 계정·구독 ID·테넌트 도메인은 예시 값으로 바꾸고, 이름·이메일·전화·주소 등 입력란은 가렸습니다. 카드 번호 등 결제 정보는 포함하지 않았습니다.</p>
-  <p>포털 화면과 Microsoft Learn 내용은 업데이트로 달라질 수 있습니다. 화면은 2026-10-27~30에 촬영했고(PART D는 화면 없음), PART D의 Learn 내용은 2026-11-01에, 나머지는 2026-10-30에 확인했습니다.</p>
+  <p><b>화면 캡처 안내</b> — 화면은 Contoso 예시 테넌트에서 촬영했습니다. 계정·구독 ID·테넌트 도메인은 예시 값으로 바꾸고, 이름·이메일·전화·주소 등 입력란은 가렸습니다. 카드 번호 등 결제 정보는 포함하지 않았습니다. PART D(STEP D3)의 쿼타 증가 양식 화면은 아무것도 입력하지 않은 공개 양식입니다.</p>
+  <p>포털 화면과 Microsoft Learn 내용은 업데이트로 달라질 수 있습니다. 화면은 2026-10-27~30에 촬영했고(PART D의 양식 화면은 2026-11-01), PART D의 Learn 내용은 2026-11-01에, 나머지는 2026-10-30에 확인했습니다.</p>
 </div>
 
 </main>
